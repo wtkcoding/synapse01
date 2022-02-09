@@ -1,0 +1,446 @@
+{
+	"name": "Notebook 2",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPool01",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "a41297a7-3171-49fb-81dc-a0646b2bfe1c"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1",
+				"state": {
+					"552a43cb-dd8e-44d0-87af-a847bb8f5ec0": {
+						"type": "Synapse.DataFrame",
+						"sync_state": {
+							"table": {
+								"rows": [
+									{
+										"0": "338995",
+										"1": "2020-01-21",
+										"2": "262",
+										"4": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338996",
+										"1": "2020-01-22",
+										"2": "313",
+										"3": "51",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338997",
+										"1": "2020-01-23",
+										"2": "578",
+										"3": "265",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338998",
+										"1": "2020-01-24",
+										"2": "841",
+										"3": "263",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "338999",
+										"1": "2020-01-25",
+										"2": "1320",
+										"3": "479",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339000",
+										"1": "2020-01-26",
+										"2": "2014",
+										"3": "694",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339001",
+										"1": "2020-01-27",
+										"2": "2798",
+										"3": "784",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339002",
+										"1": "2020-01-28",
+										"2": "4593",
+										"3": "1795",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339003",
+										"1": "2020-01-29",
+										"2": "6065",
+										"3": "1472",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									},
+									{
+										"0": "339004",
+										"1": "2020-01-30",
+										"2": "7818",
+										"3": "1753",
+										"4": "0",
+										"5": "0",
+										"12": "Worldwide",
+										"16": "2022-01-11 00:06:28.611"
+									}
+								],
+								"schema": [
+									{
+										"key": "0",
+										"name": "id",
+										"type": "int"
+									},
+									{
+										"key": "1",
+										"name": "updated",
+										"type": "date"
+									},
+									{
+										"key": "2",
+										"name": "confirmed",
+										"type": "int"
+									},
+									{
+										"key": "3",
+										"name": "confirmed_change",
+										"type": "int"
+									},
+									{
+										"key": "4",
+										"name": "deaths",
+										"type": "int"
+									},
+									{
+										"key": "5",
+										"name": "deaths_change",
+										"type": "smallint"
+									},
+									{
+										"key": "6",
+										"name": "recovered",
+										"type": "int"
+									},
+									{
+										"key": "7",
+										"name": "recovered_change",
+										"type": "int"
+									},
+									{
+										"key": "8",
+										"name": "latitude",
+										"type": "double"
+									},
+									{
+										"key": "9",
+										"name": "longitude",
+										"type": "double"
+									},
+									{
+										"key": "10",
+										"name": "iso2",
+										"type": "string"
+									},
+									{
+										"key": "11",
+										"name": "iso3",
+										"type": "string"
+									},
+									{
+										"key": "12",
+										"name": "country_region",
+										"type": "string"
+									},
+									{
+										"key": "13",
+										"name": "admin_region_1",
+										"type": "string"
+									},
+									{
+										"key": "14",
+										"name": "iso_subdivision",
+										"type": "string"
+									},
+									{
+										"key": "15",
+										"name": "admin_region_2",
+										"type": "string"
+									},
+									{
+										"key": "16",
+										"name": "load_time",
+										"type": "timestamp"
+									}
+								],
+								"truncated": false
+							},
+							"isSummary": false,
+							"language": "scala"
+						},
+						"persist_state": {
+							"view": {
+								"type": "details",
+								"chartOptions": {
+									"chartType": "bar",
+									"aggregationType": "sum",
+									"categoryFieldKeys": [
+										"1"
+									],
+									"seriesFieldKeys": [
+										"0"
+									],
+									"isStacked": false
+								}
+							}
+						}
+					}
+				}
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "Synapse PySpark"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/3d8c4a97-b8f0-4322-b6ae-05e2f42a0793/resourceGroups/wtkcodingrg/providers/Microsoft.Synapse/workspaces/wtkws101/bigDataPools/SparkPool01",
+				"name": "SparkPool01",
+				"type": "Spark",
+				"endpoint": "https://wtkws101.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": true
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%pyspark\n",
+					"blob_account_name = \"pandemicdatalake\"\n",
+					"blob_container_name = \"public\"\n",
+					"blob_relative_path = \"curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.parquet\"\n",
+					"blob_sas_token = r\"\"\n",
+					"# Allow SPARK to read from Blob remotely\n",
+					"wasbs_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\n",
+					"\n",
+					"spark.conf.set(\n",
+					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
+					"    blob_sas_token)\n",
+					"df = spark.read.parquet(wasbs_path)\n",
+					"display(df.limit(10))"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					},
+					"collapsed": true
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"\r\n",
+					"# display(df.limit(100))\r\n",
+					"\r\n",
+					"topRegions = df.select(\"updated\", \"confirmed\", \"country_region\")\r\n",
+					"topRegions.createTempView(\"top_regions\")\r\n",
+					"\r\n",
+					"topRegions.show(100)"
+				],
+				"attachments": null,
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "sparksql"
+					},
+					"collapsed": false
+				},
+				"source": [
+					"%%sql\r\n",
+					"\r\n",
+					"CREATE OR REPLACE TEMPORARY VIEW top_5_regions\r\n",
+					"AS\r\n",
+					"SELECT updated, country_region, confirmed\r\n",
+					"FROM (\r\n",
+					"    SELECT *, rank() over(partition by updated order by confirmed desc) as rnk\r\n",
+					"    FROM top_regions\r\n",
+					"    WHERE updated > '2022-01-01'\r\n",
+					") a\r\n",
+					"WHERE rnk <= 5\r\n",
+					"ORDER BY updated DESC, confirmed DESC"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": true
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"top5Regions = sqlContext.table(\"top_5_regions\")\r\n",
+					"top5Regions.show(100)"
+				],
+				"attachments": null,
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"top5Regions.printSchema()"
+				],
+				"attachments": null,
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"import uuid\r\n",
+					"\r\n",
+					"runId = uuid.uuid4()\r\n",
+					"print(runId)"
+				],
+				"attachments": null,
+				"execution_count": 8
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					},
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"\r\n",
+					"top5Regions.write.parquet('abfss://wtkcodingdlfs@wtkcodingdla.dfs.core.windows.net/top5-regions/' + str(runId) + '.parquet')\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 10
+			}
+		]
+	}
+}

@@ -1,0 +1,20 @@
+{
+	"name": "CustomerSource",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "wtkws101-WorkspaceDefaultSqlServer",
+			"type": "LinkedServiceReference",
+			"parameters": {
+				"DBName": "SQLPool01"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlDWTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "CustomerSource"
+		}
+	},
+	"type": "Microsoft.Synapse/workspaces/datasets"
+}

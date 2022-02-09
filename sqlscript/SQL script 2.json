@@ -1,0 +1,17 @@
+{
+	"name": "SQL script 2",
+	"properties": {
+		"content": {
+			"query": "-- select * from dbo.CustomerSource order by CustomerID\nselect * from dbo.DimCustomer order by CustomerID\n\n-- UPDATE [dbo].[CustomerSource]\n-- SET LastName = 'Lopez'\n-- WHERE [CustomerId] = 1\n\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPool01",
+				"poolName": "SQLPool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

@@ -1,0 +1,188 @@
+{
+	"name": "Notebook 2_activity_snapshoto",
+	"properties": {
+		"nbformat": 4,
+		"nbformat_minor": 2,
+		"bigDataPool": {
+			"referenceName": "SparkPool01",
+			"type": "BigDataPoolReference"
+		},
+		"sessionProperties": {
+			"driverMemory": "28g",
+			"driverCores": 4,
+			"executorMemory": "28g",
+			"executorCores": 4,
+			"numExecutors": 2,
+			"conf": {
+				"spark.dynamicAllocation.enabled": "false",
+				"spark.dynamicAllocation.minExecutors": "2",
+				"spark.dynamicAllocation.maxExecutors": "2",
+				"spark.autotune.trackingId": "05916235-96ea-493f-b6dc-18b0d533d69c"
+			}
+		},
+		"metadata": {
+			"saveOutput": true,
+			"synapse_widget": {
+				"version": "0.1"
+			},
+			"enableDebugMode": false,
+			"kernelspec": {
+				"name": "synapse_pyspark",
+				"display_name": "python"
+			},
+			"language_info": {
+				"name": "python"
+			},
+			"a365ComputeOptions": {
+				"id": "/subscriptions/3d8c4a97-b8f0-4322-b6ae-05e2f42a0793/resourceGroups/wtkcodingrg/providers/Microsoft.Synapse/workspaces/wtkws101/bigDataPools/SparkPool01",
+				"name": "SparkPool01",
+				"type": "Spark",
+				"endpoint": "https://wtkws101.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool01",
+				"auth": {
+					"type": "AAD",
+					"authResource": "https://dev.azuresynapse.net"
+				},
+				"sparkVersion": "3.1",
+				"nodeCount": 10,
+				"cores": 4,
+				"memory": 28,
+				"extraHeader": null
+			}
+		},
+		"cells": [
+			{
+				"cell_type": "code",
+				"metadata": {
+					"tags": [
+						"parameters_overwritten"
+					]
+				},
+				"source": [
+					"# This cell is generated from runtime parameters. Learn more: https://go.microsoft.com/fwlink/?linkid=2161015\n",
+					"runId = \"51408c32-b3fc-4d17-b6fc-2f4e4f689252\"\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 1
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"%%pyspark\n",
+					"blob_account_name = \"pandemicdatalake\"\n",
+					"blob_container_name = \"public\"\n",
+					"blob_relative_path = \"curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.parquet\"\n",
+					"blob_sas_token = r\"\"\n",
+					"# Allow SPARK to read from Blob remotely\n",
+					"wasbs_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\n",
+					"\n",
+					"spark.conf.set(\n",
+					"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
+					"    blob_sas_token)\n",
+					"df = spark.read.parquet(wasbs_path)\n",
+					"display(df.limit(10))"
+				],
+				"attachments": null,
+				"execution_count": 2
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": true
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"\r\n",
+					"# display(df.limit(100))\r\n",
+					"\r\n",
+					"topRegions = df.select(\"updated\", \"confirmed\", \"country_region\")\r\n",
+					"topRegions.createTempView(\"top_regions\")\r\n",
+					"\r\n",
+					"topRegions.show(100)"
+				],
+				"attachments": null,
+				"execution_count": 3
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "sparksql"
+					}
+				},
+				"source": [
+					"%%sql\r\n",
+					"\r\n",
+					"CREATE OR REPLACE TEMPORARY VIEW top_5_regions\r\n",
+					"AS\r\n",
+					"SELECT updated, country_region, confirmed\r\n",
+					"FROM (\r\n",
+					"    SELECT *, rank() over(partition by updated order by confirmed desc) as rnk\r\n",
+					"    FROM top_regions\r\n",
+					"    WHERE updated > '2022-01-01'\r\n",
+					") a\r\n",
+					"WHERE rnk <= 5\r\n",
+					"ORDER BY updated DESC, confirmed DESC"
+				],
+				"attachments": null,
+				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"outputs_hidden": true
+					}
+				},
+				"source": [
+					"top5Regions = sqlContext.table(\"top_5_regions\")\r\n",
+					"top5Regions.show(100)"
+				],
+				"attachments": null,
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"source": [
+					"top5Regions.printSchema()"
+				],
+				"attachments": null,
+				"execution_count": 6
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"tags": [
+						"parameters"
+					]
+				},
+				"source": [
+					"import uuid\r\n",
+					"\r\n",
+					"runId = uuid.uuid4()\r\n",
+					"print(runId)"
+				],
+				"attachments": null,
+				"execution_count": 7
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"microsoft": {
+						"language": "python"
+					}
+				},
+				"source": [
+					"%%pyspark\r\n",
+					"\r\n",
+					"top5Regions.write.parquet('abfss://wtkcodingdlfs@wtkcodingdla.dfs.core.windows.net/top5-regions/' + str(runId) + '.parquet')\r\n",
+					""
+				],
+				"attachments": null,
+				"execution_count": 8
+			}
+		]
+	}
+}
