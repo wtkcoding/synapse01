@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "wtkws101"
+		},
+		"AzureBlobStorage1_connectionString": {
+			"value": ""
+		},
+		"wtkws101-WorkspaceDefaultSqlServer_connectionString": {
+			"value": ""
+		},
+		"bing-covid-19-data_sasUri": {
+			"value": ""
+		},
+		"city_safety_boston_sasUri": {
+			"value": ""
+		},
+		"wtkws101-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://wtkcodingdla.dfs.core.windows.net"
+		}
+	}
+}
