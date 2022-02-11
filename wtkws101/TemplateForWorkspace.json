@@ -439,6 +439,66 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/DimModelDDL')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "-- CREATE TABLE [dbo].[FactResellerSales](\n--     [ProductKey] [int] NOT NULL,\n--     [OrderDateKey] [int] NOT NULL,\n--     [DueDateKey] [int] NOT NULL,\n--     [ShipDateKey] [int] NOT NULL,\n--     [ResellerKey] [int] NOT NULL,\n--     [EmployeeKey] [int] NOT NULL,\n--     [PromotionKey] [int] NOT NULL,\n--     [CurrencyKey] [int] NOT NULL,\n--     [SalesTerritoryKey] [int] NOT NULL,\n--     [SalesOrderNumber] [nvarchar](20) NOT NULL,\n--     [SalesOrderLineNumber] [tinyint] NOT NULL,\n--     [RevisionNumber] [tinyint] NULL,\n--     [OrderQuantity] [smallint] NULL,\n--     [UnitPrice] [money] NULL,\n--     [ExtendedAmount] [money] NULL,\n--     [UnitPriceDiscountPct] [float] NULL,\n--     [DiscountAmount] [float] NULL,\n--     [ProductStandardCost] [money] NULL,\n--     [TotalProductCost] [money] NULL,\n--     [SalesAmount] [money] NULL,\n--     [TaxAmt] [money] NULL,\n--     [Freight] [money] NULL,\n--     [CarrierTrackingNumber] [nvarchar](25) NULL,\n--     [CustomerPONumber] [nvarchar](25) NULL,\n--     [OrderDate] [datetime] NULL,\n--     [DueDate] [datetime] NULL,\n--     [ShipDate] [datetime] NULL\n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = HASH([SalesOrderNumber]),\n--     CLUSTERED COLUMNSTORE INDEX\n-- );\n-- GO\n\n-- CREATE TABLE [dbo].[DimReseller](\n--     [ResellerKey] [int] NOT NULL,\n--     [GeographyKey] [int] NULL,\n--     [ResellerAlternateKey] [nvarchar](15) NULL,\n--     [Phone] [nvarchar](25) NULL,\n--     [BusinessType] [varchar](20) NOT NULL,\n--     [ResellerName] [nvarchar](50) NOT NULL,\n--     [NumberEmployees] [int] NULL,\n--     [OrderFrequency] [char](1) NULL,\n--     [OrderMonth] [tinyint] NULL,\n--     [FirstOrderYear] [int] NULL,\n--     [LastOrderYear] [int] NULL,\n--     [ProductLine] [nvarchar](50) NULL,\n--     [AddressLine1] [nvarchar](60) NULL,\n--     [AddressLine2] [nvarchar](60) NULL,\n--     [AnnualSales] [money] NULL,\n--     [BankName] [nvarchar](50) NULL,\n--     [MinPaymentType] [tinyint] NULL,\n--     [MinPaymentAmount] [money] NULL,\n--     [AnnualRevenue] [money] NULL,\n--     [YearOpened] [int] NULL\n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = REPLICATE,\n--     CLUSTERED COLUMNSTORE INDEX\n-- );\n-- GO\n\n-- CREATE TABLE [dbo].[DimEmployee](\n--     [EmployeeKey] [int] NOT NULL,\n--     [ParentEmployeeKey] [int] NULL,\n--     [EmployeeNationalIDAlternateKey] [nvarchar](15) NULL,\n--     [ParentEmployeeNationalIDAlternateKey] [nvarchar](15) NULL,\n--     [SalesTerritoryKey] [int] NULL,\n--     [FirstName] [nvarchar](50) NOT NULL,\n--     [LastName] [nvarchar](50) NOT NULL,\n--     [MiddleName] [nvarchar](50) NULL,\n--     [NameStyle] [bit] NOT NULL,\n--     [Title] [nvarchar](50) NULL,\n--     [HireDate] [date] NULL,\n--     [BirthDate] [date] NULL,\n--     [LoginID] [nvarchar](256) NULL,\n--     [EmailAddress] [nvarchar](50) NULL,\n--     [Phone] [nvarchar](25) NULL,\n--     [MaritalStatus] [nchar](1) NULL,\n--     [EmergencyContactName] [nvarchar](50) NULL,\n--     [EmergencyContactPhone] [nvarchar](25) NULL,\n--     [SalariedFlag] [bit] NULL,\n--     [Gender] [nchar](1) NULL,\n--     [PayFrequency] [tinyint] NULL,\n--     [BaseRate] [money] NULL,\n--     [VacationHours] [smallint] NULL,\n--     [SickLeaveHours] [smallint] NULL,\n--     [CurrentFlag] [bit] NOT NULL,\n--     [SalesPersonFlag] [bit] NOT NULL,\n--     [DepartmentName] [nvarchar](50) NULL,\n--     [StartDate] [date] NULL,\n--     [EndDate] [date] NULL,\n--     [Status] [nvarchar](50) NULL,\n--     [EmployeePhoto] [varbinary](max) NULL\n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = REPLICATE,\n--     CLUSTERED INDEX (EmployeeKey)\n-- );\n-- GO\n\n-- CREATE TABLE [dbo].[DimProduct](\n--     [ProductKey] [int] NOT NULL,\n--     [ProductAlternateKey] [nvarchar](25) NULL,\n--     [ProductSubcategoryKey] [int] NULL,\n--     [WeightUnitMeasureCode] [nchar](3) NULL,\n--     [SizeUnitMeasureCode] [nchar](3) NULL,\n--     [EnglishProductName] [nvarchar](50) NOT NULL,\n--     [SpanishProductName] [nvarchar](50) NULL,\n--     [FrenchProductName] [nvarchar](50) NULL,\n--     [StandardCost] [money] NULL,\n--     [FinishedGoodsFlag] [bit] NOT NULL,\n--     [Color] [nvarchar](15) NOT NULL,\n--     [SafetyStockLevel] [smallint] NULL,\n--     [ReorderPoint] [smallint] NULL,\n--     [ListPrice] [money] NULL,\n--     [Size] [nvarchar](50) NULL,\n--     [SizeRange] [nvarchar](50) NULL,\n--     [Weight] [float] NULL,\n--     [DaysToManufacture] [int] NULL,\n--     [ProductLine] [nchar](2) NULL,\n--     [DealerPrice] [money] NULL,\n--     [Class] [nchar](2) NULL,\n--     [Style] [nchar](2) NULL,\n--     [ModelName] [nvarchar](50) NULL,\n--     [LargePhoto] [varbinary](max) NULL,\n--     [EnglishDescription] [nvarchar](400) NULL,\n--     [FrenchDescription] [nvarchar](400) NULL,\n--     [ChineseDescription] [nvarchar](400) NULL,\n--     [ArabicDescription] [nvarchar](400) NULL,\n--     [HebrewDescription] [nvarchar](400) NULL,\n--     [ThaiDescription] [nvarchar](400) NULL,\n--     [GermanDescription] [nvarchar](400) NULL,\n--     [JapaneseDescription] [nvarchar](400) NULL,\n--     [TurkishDescription] [nvarchar](400) NULL,\n--     [StartDate] [datetime] NULL,\n--     [EndDate] [datetime] NULL,\n--     [Status] [nvarchar](7) NULL    \n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = REPLICATE,\n--     CLUSTERED INDEX (ProductKey)\n-- );\n-- GO\n\n-- CREATE TABLE [dbo].[DimGeography](\n--     [GeographyKey] [int] NOT NULL,\n--     [City] [nvarchar](30) NULL,\n--     [StateProvinceCode] [nvarchar](3) NULL,\n--     [StateProvinceName] [nvarchar](50) NULL,\n--     [CountryRegionCode] [nvarchar](3) NULL,\n--     [EnglishCountryRegionName] [nvarchar](50) NULL,\n--     [SpanishCountryRegionName] [nvarchar](50) NULL,\n--     [FrenchCountryRegionName] [nvarchar](50) NULL,\n--     [PostalCode] [nvarchar](15) NULL,\n--     [SalesTerritoryKey] [int] NULL,\n--     [IpAddressLocator] [nvarchar](15) NULL\n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = REPLICATE,\n--     CLUSTERED COLUMNSTORE INDEX\n-- );\n-- GO\n\n\n-- CREATE TABLE [dbo].[DimProductCategory](\n--     [ProductCategoryKey] [int] NOT NULL,\n--     [ProductCategoryAlternateKey] [int] NULL,\n--     [EnglishProductCategoryName] [nvarchar](50) NOT NULL,\n--     [SpanishProductCategoryName] [nvarchar](50) NOT NULL,\n--     [FrenchProductCategoryName] [nvarchar](50) NOT NULL\n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = REPLICATE,\n--     CLUSTERED COLUMNSTORE INDEX\n-- );\n-- GO\n\n-- CREATE TABLE [dbo].[DimProductSubcategory](\n--     [ProductSubcategoryKey] [int] NOT NULL,\n--     [ProductSubcategoryAlternateKey] [int] NULL,\n--     [EnglishProductSubcategoryName] [nvarchar](50) NOT NULL,\n--     [SpanishProductSubcategoryName] [nvarchar](50) NOT NULL,\n--     [FrenchProductSubcategoryName] [nvarchar](50) NOT NULL,\n--     [ProductCategoryKey] [int] NULL\n-- )\n-- WITH\n-- (\n--     DISTRIBUTION = REPLICATE,\n--     CLUSTERED COLUMNSTORE INDEX\n-- );\n-- GO\n\nCREATE TABLE [dbo].[DimDate]\n( \n    [DateKey] [int]  NOT NULL,\n    [DateAltKey] [datetime]  NOT NULL,\n    [CalendarYear] [int]  NOT NULL,\n    [CalendarQuarter] [int]  NOT NULL,\n    [MonthOfYear] [int]  NOT NULL,\n    [MonthName] [nvarchar](15)  NOT NULL,\n    [DayOfMonth] [int]  NOT NULL,\n    [DayOfWeek] [int]  NOT NULL,\n    [DayName] [nvarchar](15)  NOT NULL,\n    [FiscalYear] [int]  NOT NULL,\n    [FiscalQuarter] [int]  NOT NULL\n)\nWITH\n(\n    DISTRIBUTION = REPLICATE,\n    CLUSTERED COLUMNSTORE INDEX\n);\nGO",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "SQLPool01",
+						"poolName": "SQLPool01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DimModelLoad')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "-- COPY INTO [dbo].[DimProduct]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimProduct.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimReseller]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimReseller.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimEmployee]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimEmployee.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimGeography]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimGeography.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[FactResellerSales]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/FactResellerSales.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimProductCategory]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimProductCategory.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimProductSubcategory]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimProductSubcategory.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\nCOPY INTO [dbo].[DimDate]\nFROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimDate.csv'\nWITH (\n    FILE_TYPE='CSV',\n    FIELDTERMINATOR='|',\n    FIELDQUOTE='',\n    ROWTERMINATOR='0x0a',\n    ENCODING = 'UTF16'\n);\nGO",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "SQLPool01",
+						"poolName": "SQLPool01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/DimModelQuery01')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "-- SELECT\n--     Coalesce(p.[ModelName], p.[EnglishProductName]) AS [Model]\n--     ,g.City AS ResellerCity\n--     ,g.StateProvinceName AS StateProvince\n--     ,Year(f.OrderDate) AS CalendarYear\n--     ,CASE\n--         WHEN Month(f.OrderDate) < 7 THEN Year(f.OrderDate)\n--         ELSE Year(f.OrderDate) + 1\n--     END AS FiscalYear -- Fiscal year runs from Jul to June)\n--     ,Month(f.OrderDate) AS [Month]\n--     ,Sum(f.OrderQuantity) AS Quantity\n--     ,ROUND(Sum(f.ExtendedAmount), 2) AS Amount\n--     ,Approx_count_distinct(f.SalesOrderNumber) AS UniqueOrders  \n-- FROM\n--     [dbo].[FactResellerSales] f\n-- INNER JOIN [dbo].[DimReseller] r\n--     ON f.ResellerKey = r.ResellerKey\n-- INNER JOIN [dbo].[DimGeography] g\n--     ON r.GeographyKey = g.GeographyKey\n-- INNER JOIN [dbo].[DimProduct] p\n--     ON f.[ProductKey] = p.[ProductKey]\n-- GROUP BY\n--     Coalesce(p.[ModelName], p.[EnglishProductName])\n--     ,g.City\n--     ,g.StateProvinceName\n--     ,Year(f.OrderDate)\n--     ,CASE\n--         WHEN Month(f.OrderDate) < 7 THEN Year(f.OrderDate)\n--         ELSE Year(f.OrderDate) + 1\n--     END\n--     ,Month(f.OrderDate)\n-- ORDER BY Amount DESC\n\n\n-- SELECT\n--     pc.EnglishProductCategoryName AS ProductCategory\n--     ,psc.EnglishProductSubcategoryName AS ProductSubcategory\n--     ,Year(f.OrderDate) AS CalendarYear\n--     ,CASE\n--         WHEN Month(f.OrderDate) < 7 THEN Year(f.OrderDate)\n--         ELSE Year(f.OrderDate) + 1\n--     END AS FiscalYear -- Fiscal year runs from Jul to June)\n--     ,Month(f.OrderDate) AS [Month]\n--     ,Sum(f.OrderQuantity) AS Quantity\n--     ,Sum(f.ExtendedAmount) AS Amount\n--     ,Approx_count_distinct(f.SalesOrderNumber) AS UniqueOrders  \n-- FROM\n--     [dbo].[FactResellerSales] f\n-- INNER JOIN [dbo].[DimProduct] p\n--     ON f.[ProductKey] = p.[ProductKey]\n-- INNER JOIN [dbo].[DimProductSubcategory] psc\n--     ON p.[ProductSubcategoryKey] = psc.[ProductSubcategoryKey]\n-- INNER JOIN [dbo].[DimProductCategory] pc\n--     ON psc.[ProductCategoryKey] = pc.[ProductCategoryKey]\n-- GROUP BY\n--     pc.EnglishProductCategoryName\n--     ,psc.EnglishProductSubcategoryName\n--     ,Year(f.OrderDate)\n--     ,CASE\n--         WHEN Month(f.OrderDate) < 7 THEN Year(f.OrderDate)\n--         ELSE Year(f.OrderDate) + 1\n--     END\n--     ,Month(f.OrderDate)\n-- ORDER BY Amount DESC\n\nSELECT\n    Coalesce(p.[ModelName], p.[EnglishProductName]) AS [Model]\n    ,g.City AS ResellerCity\n    ,g.StateProvinceName AS StateProvince\n    ,d.[CalendarYear]\n    ,d.[FiscalYear]\n    ,d.[MonthOfYear] AS [Month]\n    ,sum(f.OrderQuantity) AS Quantity\n    ,sum(f.ExtendedAmount) AS Amount\n    ,approx_count_distinct(f.SalesOrderNumber) AS UniqueOrders  \nFROM\n    [dbo].[FactResellerSales] f\nINNER JOIN [dbo].[DimReseller] r\n    ON f.ResellerKey = r.ResellerKey\nINNER JOIN [dbo].[DimGeography] g\n    ON r.GeographyKey = g.GeographyKey\nINNER JOIN [dbo].[DimDate] d\n    ON f.[OrderDateKey] = d.[DateKey]\nINNER JOIN [dbo].[DimProduct] p\n    ON f.[ProductKey] = p.[ProductKey]\nWHERE d.[MonthOfYear] = 10 AND d.[FiscalYear] IN (2012, 2013)\nGROUP BY\n    Coalesce(p.[ModelName], p.[EnglishProductName])\n    ,g.City\n    ,g.StateProvinceName\n    ,d.[CalendarYear]\n    ,d.[FiscalYear]\n    ,d.[MonthOfYear]\nORDER BY d.[FiscalYear]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "SQLPool01",
+						"poolName": "SQLPool01"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/SQL script 1')]",
 			"type": "Microsoft.Synapse/workspaces/sqlscripts",
 			"apiVersion": "2019-06-01-preview",
@@ -465,26 +525,6 @@
 			"properties": {
 				"content": {
 					"query": "-- select * from dbo.CustomerSource order by CustomerID\nselect * from dbo.DimCustomer order by CustomerID\n\n-- UPDATE [dbo].[CustomerSource]\n-- SET LastName = 'Lopez'\n-- WHERE [CustomerId] = 1\n\n",
-					"metadata": {
-						"language": "sql"
-					},
-					"currentConnection": {
-						"databaseName": "SQLPool01",
-						"poolName": "SQLPool01"
-					},
-					"resultLimit": 5000
-				},
-				"type": "SqlQuery"
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/SQL script 3')]",
-			"type": "Microsoft.Synapse/workspaces/sqlscripts",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"content": {
-					"query": "select top 5 * from dbo.DimCustomer",
 					"metadata": {
 						"language": "sql"
 					},
@@ -949,205 +989,6 @@
 						"attachments": null,
 						"outputs": [],
 						"execution_count": 10
-					}
-				]
-			},
-			"dependsOn": []
-		},
-		{
-			"name": "[concat(parameters('workspaceName'), '/Notebook 2_activity_snapshoto')]",
-			"type": "Microsoft.Synapse/workspaces/notebooks",
-			"apiVersion": "2019-06-01-preview",
-			"properties": {
-				"nbformat": 4,
-				"nbformat_minor": 2,
-				"bigDataPool": {
-					"referenceName": "SparkPool01",
-					"type": "BigDataPoolReference"
-				},
-				"sessionProperties": {
-					"driverMemory": "28g",
-					"driverCores": 4,
-					"executorMemory": "28g",
-					"executorCores": 4,
-					"numExecutors": 2,
-					"conf": {
-						"spark.dynamicAllocation.enabled": "false",
-						"spark.dynamicAllocation.minExecutors": "2",
-						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "05916235-96ea-493f-b6dc-18b0d533d69c"
-					}
-				},
-				"metadata": {
-					"saveOutput": true,
-					"synapse_widget": {
-						"version": "0.1"
-					},
-					"enableDebugMode": false,
-					"kernelspec": {
-						"name": "synapse_pyspark",
-						"display_name": "python"
-					},
-					"language_info": {
-						"name": "python"
-					},
-					"a365ComputeOptions": {
-						"id": "/subscriptions/3d8c4a97-b8f0-4322-b6ae-05e2f42a0793/resourceGroups/wtkcodingrg/providers/Microsoft.Synapse/workspaces/wtkws101/bigDataPools/SparkPool01",
-						"name": "SparkPool01",
-						"type": "Spark",
-						"endpoint": "https://wtkws101.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/SparkPool01",
-						"auth": {
-							"type": "AAD",
-							"authResource": "https://dev.azuresynapse.net"
-						},
-						"sparkVersion": "3.1",
-						"nodeCount": 10,
-						"cores": 4,
-						"memory": 28,
-						"extraHeader": null
-					}
-				},
-				"cells": [
-					{
-						"cell_type": "code",
-						"metadata": {
-							"tags": [
-								"parameters_overwritten"
-							]
-						},
-						"source": [
-							"# This cell is generated from runtime parameters. Learn more: https://go.microsoft.com/fwlink/?linkid=2161015\n",
-							"runId = \"51408c32-b3fc-4d17-b6fc-2f4e4f689252\"\n",
-							""
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 1
-					},
-					{
-						"cell_type": "code",
-						"source": [
-							"%%pyspark\n",
-							"blob_account_name = \"pandemicdatalake\"\n",
-							"blob_container_name = \"public\"\n",
-							"blob_relative_path = \"curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.parquet\"\n",
-							"blob_sas_token = r\"\"\n",
-							"# Allow SPARK to read from Blob remotely\n",
-							"wasbs_path = 'wasbs://%s@%s.blob.core.windows.net/%s' % (blob_container_name, blob_account_name, blob_relative_path)\n",
-							"\n",
-							"spark.conf.set(\n",
-							"    'fs.azure.sas.%s.%s.blob.core.windows.net' % (blob_container_name, blob_account_name),\n",
-							"    blob_sas_token)\n",
-							"df = spark.read.parquet(wasbs_path)\n",
-							"display(df.limit(10))"
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 2
-					},
-					{
-						"cell_type": "code",
-						"metadata": {
-							"jupyter": {
-								"outputs_hidden": true
-							}
-						},
-						"source": [
-							"%%pyspark\r\n",
-							"\r\n",
-							"# display(df.limit(100))\r\n",
-							"\r\n",
-							"topRegions = df.select(\"updated\", \"confirmed\", \"country_region\")\r\n",
-							"topRegions.createTempView(\"top_regions\")\r\n",
-							"\r\n",
-							"topRegions.show(100)"
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 3
-					},
-					{
-						"cell_type": "code",
-						"metadata": {
-							"microsoft": {
-								"language": "sparksql"
-							}
-						},
-						"source": [
-							"%%sql\r\n",
-							"\r\n",
-							"CREATE OR REPLACE TEMPORARY VIEW top_5_regions\r\n",
-							"AS\r\n",
-							"SELECT updated, country_region, confirmed\r\n",
-							"FROM (\r\n",
-							"    SELECT *, rank() over(partition by updated order by confirmed desc) as rnk\r\n",
-							"    FROM top_regions\r\n",
-							"    WHERE updated > '2022-01-01'\r\n",
-							") a\r\n",
-							"WHERE rnk <= 5\r\n",
-							"ORDER BY updated DESC, confirmed DESC"
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 4
-					},
-					{
-						"cell_type": "code",
-						"metadata": {
-							"jupyter": {
-								"outputs_hidden": true
-							}
-						},
-						"source": [
-							"top5Regions = sqlContext.table(\"top_5_regions\")\r\n",
-							"top5Regions.show(100)"
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 5
-					},
-					{
-						"cell_type": "code",
-						"source": [
-							"top5Regions.printSchema()"
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 6
-					},
-					{
-						"cell_type": "code",
-						"metadata": {
-							"tags": [
-								"parameters"
-							]
-						},
-						"source": [
-							"import uuid\r\n",
-							"\r\n",
-							"runId = uuid.uuid4()\r\n",
-							"print(runId)"
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 7
-					},
-					{
-						"cell_type": "code",
-						"metadata": {
-							"microsoft": {
-								"language": "python"
-							}
-						},
-						"source": [
-							"%%pyspark\r\n",
-							"\r\n",
-							"top5Regions.write.parquet('abfss://wtkcodingdlfs@wtkcodingdla.dfs.core.windows.net/top5-regions/' + str(runId) + '.parquet')\r\n",
-							""
-						],
-						"attachments": null,
-						"outputs": [],
-						"execution_count": 8
 					}
 				]
 			},
