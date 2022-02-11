@@ -1,0 +1,17 @@
+{
+	"name": "DimModelLoad",
+	"properties": {
+		"content": {
+			"query": "-- COPY INTO [dbo].[DimProduct]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimProduct.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimReseller]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimReseller.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimEmployee]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimEmployee.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimGeography]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimGeography.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[FactResellerSales]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/FactResellerSales.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimProductCategory]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimProductCategory.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\n-- COPY INTO [dbo].[DimProductSubcategory]\n-- FROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimProductSubcategory.csv'\n-- WITH (\n--     FILE_TYPE='CSV',\n--     FIELDTERMINATOR='|',\n--     FIELDQUOTE='',\n--     ROWTERMINATOR='\\n',\n--     ENCODING = 'UTF16'\n-- );\n-- GO\n\nCOPY INTO [dbo].[DimDate]\nFROM 'https://solliancepublicdata.blob.core.windows.net/dataengineering/dp-203/awdata/DimDate.csv'\nWITH (\n    FILE_TYPE='CSV',\n    FIELDTERMINATOR='|',\n    FIELDQUOTE='',\n    ROWTERMINATOR='0x0a',\n    ENCODING = 'UTF16'\n);\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPool01",
+				"poolName": "SQLPool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
