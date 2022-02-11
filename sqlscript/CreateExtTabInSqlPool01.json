@@ -1,0 +1,17 @@
+{
+	"name": "CreateExtTabInSqlPool01",
+	"properties": {
+		"content": {
+			"query": "-- Replace YOURACCOUNT with the name of your ADLS Gen2 account.\nCREATE EXTERNAL DATA SOURCE ABSS\nWITH\n( TYPE = HADOOP,\n    LOCATION = 'abfss://wtkcodingdlfs@wtkcodingdla.dfs.core.windows.net'\n)\nGO\n\nCREATE EXTERNAL FILE FORMAT [ParquetFormat]\nWITH (\n    FORMAT_TYPE = PARQUET,\n    DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec'\n)\nGO\n\nCREATE SCHEMA [wtk_external];\nGO\n\nCREATE EXTERNAL TABLE [wtk_external].Top5_Regions\n    (\n        [TransactionId] [nvarchar](36)  NOT NULL,\n        [CustomerId] [int]  NOT NULL,\n        [ProductId] [smallint]  NOT NULL,\n        [Quantity] [smallint]  NOT NULL,\n        [Price] [decimal](9,2)  NOT NULL,\n        [TotalAmount] [decimal](9,2)  NOT NULL,\n        [TransactionDate] [int]  NOT NULL,\n        [ProfitAmount] [decimal](9,2)  NOT NULL,\n        [Hour] [tinyint]  NOT NULL,\n        [Minute] [tinyint]  NOT NULL,\n        [StoreId] [smallint]  NOT NULL\n    )\nWITH\n    (\n        LOCATION = '/top5-regions',  \n        DATA_SOURCE = ABSS,\n        FILE_FORMAT = [ParquetFormat]  \n    )  \nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPool01",
+				"poolName": "SQLPool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

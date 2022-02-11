@@ -1,0 +1,17 @@
+{
+	"name": "CreateExternalTable",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET, DATA_COMPRESSION = 'org.apache.hadoop.io.compress.SnappyCodec')\nGO\n\nIF NOT EXISTS (SELECT * FROM sys.external_data_sources WHERE name = 'wtkcodingdlfs_wtkcodingdla_dfs_core_windows_net') \n\tCREATE EXTERNAL DATA SOURCE [wtkcodingdlfs_wtkcodingdla_dfs_core_windows_net] \n\tWITH (\n\t\tLOCATION = 'abfss://wtkcodingdlfs@wtkcodingdla.dfs.core.windows.net' \n\t)\nGO\n\nCREATE SCHEMA [ext];\nGO\n\nCREATE EXTERNAL TABLE ext.Top5_Regions (\n\t[updated] date,\n\t[country_region] nvarchar(4000),\n\t[confirmed] int\n\t)\n\tWITH (\n\tLOCATION = 'top5-regions',\n\tDATA_SOURCE = [wtkcodingdlfs_wtkcodingdla_dfs_core_windows_net],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\nSELECT TOP 100 * FROM ext.Top5_Regions\nGO",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPool01",
+				"poolName": "SQLPool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

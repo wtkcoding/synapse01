@@ -1,0 +1,17 @@
+{
+	"name": "CreaterUserForLoad",
+	"properties": {
+		"content": {
+			"query": "-- select * from sys.sysusers\n-- select * from sys.database_role_members\n\n-- Connect to master\n-- CREATE LOGIN loader WITH PASSWORD = 'Passw0rd!';\n\n-- Connect to the SQL pool\nCREATE USER loader FOR LOGIN loader;\nGRANT ADMINISTER DATABASE BULK OPERATIONS TO loader;\nGRANT INSERT TO loader;\nGRANT SELECT TO loader;\nGRANT CREATE TABLE TO loader;\nGRANT ALTER ON SCHEMA::dbo TO loader;\n\nCREATE WORKLOAD GROUP DataLoads\nWITH ( \n    MIN_PERCENTAGE_RESOURCE = 100\n    ,CAP_PERCENTAGE_RESOURCE = 100\n    ,REQUEST_MIN_RESOURCE_GRANT_PERCENT = 100\n    );\n\nCREATE WORKLOAD CLASSIFIER [wgcELTLogin]\nWITH (\n        WORKLOAD_GROUP = 'DataLoads'\n        ,MEMBERNAME = 'loader'\n);\n\n\nSELECT * FROM sys.workload_management_workload_groups\nSELECT * FROM sys.workload_management_workload_classifiers\nSELECT * FROM sys.workload_management_workload_classifier_details\nSELECT * FROM sys.sysusers",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPool01",
+				"poolName": "SQLPool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
