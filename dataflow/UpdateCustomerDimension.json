@@ -13,7 +13,7 @@
 				},
 				{
 					"dataset": {
-						"referenceName": "AzureSynapseAnalyticsTable1",
+						"referenceName": "DimCustomer",
 						"type": "DatasetReference"
 					},
 					"name": "DimCustomer"
@@ -22,7 +22,7 @@
 			"sinks": [
 				{
 					"dataset": {
-						"referenceName": "AzureSynapseAnalyticsTable1",
+						"referenceName": "DimCustomer",
 						"type": "DatasetReference"
 					},
 					"name": "Sink"

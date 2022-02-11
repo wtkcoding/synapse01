@@ -1,5 +1,5 @@
 {
-	"name": "AzureSynapseAnalyticsTable1",
+	"name": "DimCustomer",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "wtkws101-WorkspaceDefaultSqlServer",
