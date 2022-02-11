@@ -1,0 +1,17 @@
+{
+	"name": "LoadUsingCopy",
+	"properties": {
+		"content": {
+			"query": "CREATE SCHEMA stg;\nGO\n\nCREATE TABLE [stg].[Top5_Regions]\n(\n    [updated] date,\n\t[country_region] nvarchar(4000),\n\t[confirmed] int\n)\nWITH\n(\n    DISTRIBUTION = HASH (updated),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n\nCOPY INTO [stg].[Top5_Regions]\nFROM 'https://wtkcodingdla.dfs.core.windows.net/wtkcodingdlfs/top5-regions'\nWITH (\n    FILE_TYPE = 'PARQUET',\n    COMPRESSION = 'SNAPPY'\n);\nGO\n\nSELECT top 100 * FROM [stg].[Top5_Regions];\n\n\nDROP TABLE [stg].[covid19]\nGO\n\nCREATE TABLE [stg].[covid19]\n(\n    [id] int,\n    [updated] date,\n\t[confirmed] int,\n\t[confirmed_change] int,\n\t[deaths] int,\n\t[deaths_change] smallint,\n\t[recovered] int,\n\t[recovered_change] int,\n\t[latitude] float,\n\t[longitude] float,\n\t[iso2] varchar(8000),\n\t[iso3] varchar(8000),\n\t[country_region] varchar(8000),\n\t[admin_region_1] varchar(8000),\n\t[iso_subdivision] varchar(8000),\n\t[admin_region_2] varchar(8000),\n\t[load_time] datetime2(7)\n)\nWITH\n(\n    DISTRIBUTION = ROUND_ROBIN,\n    HEAP\n)\nGO\n\nCOPY INTO [stg].[covid19]\nFROM 'https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.parquet'\nWITH (\n    FILE_TYPE = 'PARQUET',\n    COMPRESSION = 'SNAPPY'\n);\nGO\n\nselect count(1) from [stg].[covid19];\nSELECT * FROM (\n    SELECT updated, country_region, sum(confirmed) AS total_confirmed\n    from [stg].[covid19]\n    group by updated, country_region\n) T\norder by updated, country_region desc;\n\n\nCREATE TABLE [stg].[covid19_01]\n(\n    [id] int,\n    [updated] date,\n\t[confirmed] int,\n\t[confirmed_change] int,\n\t[deaths] int,\n\t[deaths_change] smallint,\n\t[recovered] int,\n\t[recovered_change] int,\n\t[latitude] float,\n\t[longitude] float,\n\t[iso2] varchar(8000),\n\t[iso3] varchar(8000),\n\t[country_region] varchar(8000),\n\t[admin_region_1] varchar(8000),\n\t[iso_subdivision] varchar(8000),\n\t[admin_region_2] varchar(8000),\n\t[load_time] datetime2(7)\n)\nWITH\n(\n    DISTRIBUTION = HASH(updated),\n    CLUSTERED COLUMNSTORE INDEX\n)\nGO\n\ninsert into [stg].[covid19_01] select * FROM [stg].[covid19];\nSELECT * FROM (\n    SELECT updated, country_region, sum(confirmed) AS total_confirmed\n    from [stg].[covid19_01]\n    group by updated, country_region\n) T\norder by updated, country_region desc;",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"databaseName": "SQLPool01",
+				"poolName": "SQLPool01"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
